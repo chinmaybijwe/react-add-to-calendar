@@ -142,7 +142,7 @@ export default class ReactAddToCalendar extends React.Component {
         template[0]
 
       let buttonIconClass =
-        `react-add-to-calendar__icon--${iconPlacement} ${mainButtonIconClassPrefix}${mainButtonIconClass}";
+        `react-add-to-calendar__icon--${iconPlacement} ${mainButtonIconClassPrefix}${mainButtonIconClass}`
 
       buttonIcon = <i className={buttonIconClass} />;
       buttonLabel = iconPlacement === "right"
