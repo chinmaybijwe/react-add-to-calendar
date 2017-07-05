@@ -132,15 +132,17 @@ export default class ReactAddToCalendar extends React.Component {
     let template = Object.keys(this.props.buttonTemplate);
 
     if (template[0] !== "textOnly") {
-      let iconPlacement = this.props.buttonTemplate[template];
-      let buttonIconClass =
-        "react-add-to-calendar__icon--" + iconPlacement + " fa fa-";
+      const iconPlacement = this.props.buttonTemplate[template];
+      
+      const mainButtonIconClassPrefix = useFontAwesomeForButtonIcon ? "fa fa-" : "";
+      
+      const mainButtonIconClass = (template[0] === "caret") ? 
+        this.state.optionsOpen ? 
+          "caret-up" : "caret-down" : 
+        template[0]
 
-      if (template[0] === "caret") {
-        buttonIconClass += this.state.optionsOpen ? "caret-up" : "caret-down";
-      } else {
-        buttonIconClass += template[0];
-      }
+      let buttonIconClass =
+        `react-add-to-calendar__icon--${iconPlacement} ${mainButtonIconClassPrefix}${mainButtonIconClass}";
 
       buttonIcon = <i className={buttonIconClass} />;
       buttonLabel = iconPlacement === "right"
@@ -194,6 +196,7 @@ ReactAddToCalendar.propTypes = {
   buttonClassOpen: PropTypes.string,
   buttonLabel: PropTypes.string,
   buttonTemplate: PropTypes.object,
+  useFontAwesomeForButtonIcon: PropTypes.bool,
   buttonWrapperClass: PropTypes.string,
   displayItemIcons: PropTypes.bool,
   optionsOpen: PropTypes.bool,
@@ -214,6 +217,7 @@ ReactAddToCalendar.defaultProps = {
   buttonClassOpen: "react-add-to-calendar__button--light",
   buttonLabel: "Add to My Calendar",
   buttonTemplate: { caret: "right" },
+  useFontAwesomeForButtonIcon: true,
   buttonWrapperClass: "react-add-to-calendar__wrapper",
   displayItemIcons: true,
   optionsOpen: false,
